@@ -90,12 +90,14 @@ def shortest_path(source, target):
     that connect the source to the target.
 
     If no possible path, returns None.
-    """
 
-    # Adapt breadth-first search from src0/maze.solve()
+    Credit: adapted from CS50AI's maze.solve() function
+    """
 
     # Initialize frontier to just the starting position
     start = Node(state=source, parent=None, action=None)
+
+    # Use breadth-first search to find shortest path
     frontier = StackFrontier()
     frontier.add(start)
 
@@ -121,11 +123,11 @@ def shortest_path(source, target):
                 child = Node(state=person, parent=node, action=movie)
 
                 # If node is the goal, then we have a solution
-                if node.state == target:
+                if child.state == target:
                     path = []
-                    while node.parent is not None:
-                        path.append((node.action, node.state))
-                        node = node.parent
+                    while child.parent is not None:
+                        path.append((child.action, child.state))
+                        child = child.parent
                     path.reverse()
                     return path
 
